@@ -1,0 +1,9 @@
+{% if screen_list %}
+<ul>
+    {% for screen in screen_list %}
+    <li>{{ screen.name }} => {{ screen.message }}</li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No Screens defined.</p>
+{% endif %}
