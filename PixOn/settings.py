@@ -35,8 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'jsoneditor',
-    'gui'
+    'gui',
 ]
 
 MIDDLEWARE = [
@@ -108,7 +107,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
@@ -116,8 +115,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # PixOn
-# https://github.com/nnseva/django-jsoneditor
-JSON_EDITOR_JS = 'https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/4.2.1/jsoneditor.js'
-JSON_EDITOR_CSS = 'https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/4.2.1/jsoneditor.css'
 # https://github.com/jarekwg/django-apscheduler
-
+MEDIA_ROOT = os.path.join(BASE_DIR, 'upload')

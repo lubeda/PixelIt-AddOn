@@ -1,0 +1,10 @@
+
+{% if bmp_list %}
+<ul>
+    {% for template in bmp_list %}
+    <li>{{ template.name }} => <img src="{{media_root}}/{{ template.image }}"></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No templates are available.</p>
+{% endif %}

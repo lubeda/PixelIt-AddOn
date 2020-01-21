@@ -1,0 +1,10 @@
+
+{% if template_list %}
+<ul>
+    {% for template in template_list %}
+    <li>{{ template.name }} => {{ template.template | length }} => {{ template.note }}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No templates are available.</p>
+{% endif %}

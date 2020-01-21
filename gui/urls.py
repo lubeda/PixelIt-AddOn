@@ -6,4 +6,6 @@ urlpatterns = [
     path('screen/<str:name>/', views.screen, name='one_screen'),
     path('templates/', views.templates, name='all_templates'),
     path('template/<str:name>/', views.template, name='one_template'),
+    path('bitmap/<str:name>/', views.bitmap, name='one_bitmap'),
+    path('bitmaps/', views.bitmaps, name='all_bitmap'),
 ]

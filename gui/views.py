@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.template import loader
-from .models import Screen, Template
+from django.db import models
+from .models import Screen, Template, Bitmap
+from django.conf import settings
 
 
 # Create your views here.
@@ -36,8 +38,28 @@ def templates(request):
 
 def template(request, name):
     screen_list = Screen.objects.get(name=name)
-    template = loader.get_template('screens.html')
+    html_template = loader.get_template('screens.html')
     context = {
         'screen_list': screen_list,
     }
-    return HttpResponse(template.render(context, request))
+    return HttpResponse(html_template.render(context, request))
+
+
+def bitmaps(request):
+    bmp_list = Bitmap.objects.all
+    html_template = loader.get_template('bitmaps.html')
+    context = {
+        'bmp_list': bmp_list,
+        'media_root': settings.MEDIA_ROOT
+    }
+    return HttpResponse(html_template.render(context, request))
+
+def bitmap(request, name):
+    icon = Bitmap.objects.get(name=name)
+    print(Bitmap.jsonvert(icon, name))
+    html_template = loader.get_template('bitmap.html')
+    context = {
+        'screen_list': icon,
+        'bitmap': Bitmap.jsonvert(icon,name),
+    }
+    return HttpResponse(html_template.render(context, request))
