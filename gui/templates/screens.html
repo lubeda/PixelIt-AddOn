@@ -1,9 +1,24 @@
+{% extends 'base.html' %}}
+
+{% block title %} Startpage {% endblock %}
+
+{% block content %}
+
 {% if screen_list %}
+It is: {{ now }}<BR>
 <ul>
     {% for screen in screen_list %}
-    <li>{{ screen.name }} => {{ screen.message }} => {{ screen.template.name }}</a></li>
+    <li>From: {{ screen.start_dt }}<br>
+        To: {{ screen.end_dt }}<BR>
+        <a href="/gui/screen/{{ screen.name }}/">Screen: {{ screen.name }} => {{ screen.message }}<BR></a>
+        Template: {{ screen.template.name }}
+    </li>
     {% endfor %}
 </ul>
 {% else %}
-<p>No polls are available.</p>
+<p>No screens in display Loop.</p>
 {% endif %}
+<a href="/gui/form/screen" class="btn btn-primary">Add new screen</a>
+<a href="/gui/form/timer" class="btn btn-primary">Add new timer</a>
+<a href="/gui/form/alarm" class="btn btn-primary">Add new alarm</a>
+{% endblock %}

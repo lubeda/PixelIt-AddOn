@@ -15,13 +15,9 @@ PixTemp = """{
         "textString": "PixOn",
         "scrollText": "auto", 
         "scrollTextDelay": 20,
-        "position": {
-            "x": 8,
-            "y": 1
-        }
+        "color": {"r": 128,"g": 128,"b": 128},
     }
 }"""
-
 
 class Sound(models.Model):
     name = models.CharField(max_length=12, blank=False)
@@ -40,16 +36,13 @@ class Sound(models.Model):
     photo.save()
 """
 
-
-
 class Template(models.Model):
     name = models.CharField(max_length=12, blank=False)
     template = models.TextField(default=PixTemp, blank=False, max_length=3072)
-    note = models.TextField(blank=False, max_length=512)
+    note = models.TextField(blank=True, max_length=512)
 
     def __str__(self):
-        return "<name> " + self.name + " <templatesize> " + str(len(self.template)) + " <note> " + self.note
-
+        return "<name> " + self.name + " <note> " + self.note
 
 class Screen(models.Model):
     name = models.CharField(max_length=20)
@@ -57,10 +50,13 @@ class Screen(models.Model):
     message = models.CharField(max_length=30)
     start_dt = models.DateTimeField("DT to start display this screen")
     end_dt = models.DateTimeField("DT to end display of this screen")
+    sound_played = models.BooleanField("sound played",default=False)
 
     def __str__(self):
-        return "<name> " + self.name + " <message> " + self.message
+        return "<name> " + self.name + " <message> " + self.message + " <start> " + str(self.start_dt)
 
+    class Meta:
+       ordering = ('-start_dt',)
 
 class Bitmap(models.Model):
     name = models.CharField(max_length=20)
@@ -89,24 +85,29 @@ class Bitmap(models.Model):
             frames = 0
 
         if frames > 0:
-            ret = "["
+            bmp = "["
         else:
-            ret = ""
+            bmp = ""
         for frame in range(0, 9):
             try:
                 img.seek(frame)
                 rgb_img = img.convert('RGB')
-                ret += "["
+                bmp += "["
                 for y in range(h):
                     for x in range(w):
                         r, g, b = rgb_img.getpixel((x, y))
                         rgb = ((r & 0b11111000) << 8) | ((g & 0b11111100) << 3) | (b >> 3)
-                        ret += str(rgb) + ","
-                ret = ret[:-1] + "],"
+                        bmp += str(rgb) + ","
+                bmp = bmp[:-1] + "],"
             except:
                 pass
         if frames > 0:
-            ret = ret[:-1] + "]"
+            bmp = bmp[:-1] + "]"
         else:
-            ret = ret[:-1]
+            bmp = bmp[:-1]
+        if frames > 0:
+            ret = '"bitmapAnimation": {"data": ' + bmp + ',"rubberbanding": false,"animationDelay":160, "limitLoops": 0 }'
+        else:
+            ret = '"bitmap": {"data":' + bmp + ',"position": {"x": 0,"y": 0 }, "size": {"width": ' + str(self.width) + \
+                  ', "height": ' + str(self.height) + '}}'
         return ret

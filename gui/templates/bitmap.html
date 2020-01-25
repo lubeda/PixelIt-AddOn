@@ -1,10 +1,12 @@
+{% extends 'base.html' %}}
 
-{% if template_list %}
-<ul>
-    {% for template in template_list %}
-    <li>{{ template.name }} => {{ template.template | length }} => {{ template.note }}</a></li>
-    {% endfor %}
-</ul>
-{% else %}
-<p>No templates are available.</p>
-{% endif %}
+{% block title %} Startpage {% endblock %}
+
+{% block content %}
+{{ icon.name }} =><img src="/gui/media/{{ icon.image }}"   class="img-thumbnail">
+<P class="text-break text-monospace  bg-light  font-size: small ">{{icon.json}}</P>
+
+<a href="/gui/bitmap" class="btn btn-primary">Add new Bitmap</a>
+<a href="/gui/show/b/{{ icon.name }} " class="btn btn-secondary">Push to display</a>
+{% endblock %}
+

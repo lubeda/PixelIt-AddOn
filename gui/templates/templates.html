@@ -1,10 +1,18 @@
+{% extends 'base.html' %}}
+
+{% block title %} Templates xxx{% endblock %}
+
+{% block content %}
 
 {% if template_list %}
 <ul>
     {% for template in template_list %}
-    <li>{{ template.name }} => {{ template.template | length }} => {{ template.note }}</a></li>
+    <li><a href="../template/{{ template.name }}/" {{ template.name }}</li> {{ template.name }} => {{ template.note }}</a></li>
     {% endfor %}
 </ul>
 {% else %}
 <p>No templates are available.</p>
 {% endif %}
+
+<a href="/gui/form/template" class="btn btn-primary">Add new Template</a>
+{% endblock %}

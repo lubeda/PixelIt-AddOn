@@ -1,10 +1,23 @@
+{% extends 'base.html' %}}
+
+{% block title %} Show Images {% endblock %}
+
+{% block content %}
 
 {% if bmp_list %}
+
 <ul>
     {% for template in bmp_list %}
-    <li>{{ template.name }} => <img src="{{media_root}}/{{ template.image }}"></li>
+        <li>
+            {{ template.name }} =><a href="../bitmap/{{ template.name }}/"><img src="/gui/media/{{ template.image }}"  width="{{ template.width|add:template.width }}" height="{{ template.height|add:template.height }}"></a>
+        </li>
     {% endfor %}
 </ul>
+
 {% else %}
-<p>No templates are available.</p>
+    <p>No templates are available.</p>
 {% endif %}
+
+<a href="/gui/form/bitmap" class="btn btn-primary">Add new Bitmap</a>
+
+ {% endblock %}

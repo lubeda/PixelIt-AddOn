@@ -1,0 +1,15 @@
+{% extends 'base.html' %}}
+
+{% block title %} Template {{ template.name }}{% endblock %}
+
+{% block content %}
+
+
+     {{ template.name }} => {{ template.note }}<BR>
+    <P class="text-break text-monospace  bg-light  font-size: small ">
+        {{ template.template }}
+    </P>
+
+<a href="/gui/form/template" class="btn btn-primary">Add new Template</a>
+<a href="/gui/show/t/{{ template.name }} " class="btn btn-secondary">Push to display</a>
+{% endblock %}

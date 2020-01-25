@@ -1,9 +1,10 @@
-{% if screen_list %}
-<ul>
-    {% for screen in screen_list %}
-    <li>{{ screen.name }} => {{ screen.message }}</li>
-    {% endfor %}
-</ul>
-{% else %}
-<p>No Screens defined.</p>
-{% endif %}
+{% extends 'base.html' %}}
+
+{% block title %} Screen {{ screen.name }} {% endblock %}
+
+{% block content %}
+    {{ screen.name }} => {{ screen.message }}<BR>
+    {{ screen.soundplayed }}
+
+<a href="/gui/bitmap" class="btn btn-danger">Delete this screen</a>
+{% endblock %}
