@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'gui',
+    'durationwidget',
 ]
 
 MIDDLEWARE = [
@@ -117,3 +118,4 @@ STATIC_URL = '/static/'
 # PixOn
 # https://github.com/jarekwg/django-apscheduler
 MEDIA_ROOT = os.path.join(BASE_DIR, 'upload')
+MEDIA_URL = '/media/'
